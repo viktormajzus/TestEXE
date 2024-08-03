@@ -24,10 +24,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>pch</Filter>
     </ClCompile>
-    <ClCompile Include="Process.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="error.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Process.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,11 +35,14 @@
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
     </ClInclude>
-    <ClInclude Include="Process.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="error.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Process.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

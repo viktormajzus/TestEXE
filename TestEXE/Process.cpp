@@ -26,6 +26,30 @@ Process::~Process()
   }
 }
 
+std::expected<std::uintptr_t, Errors> Process::SetModuleBase(std::wstring_view moduleBase)
+{
+  HANDLE snapshot{ CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, *processId) };
+  if (snapshot == INVALID_HANDLE_VALUE)
+    return std::unexpected(Errors::error_failed_snapshot);
+
+  MODULEENTRY32 moduleEntry{ .dwSize = sizeof(MODULEENTRY32) };
+
+  Module32First(snapshot, &moduleEntry);
+
+  do
+  {
+    if (moduleBase.compare(moduleEntry.szModule)) // If not 0
+      continue;
+
+    CloseHandle(snapshot);
+    return reinterpret_cast<std::uintptr_t>(moduleEntry.modBaseAddr);
+  } while (Module32Next(snapshot, &moduleEntry));
+
+  CloseHandle(snapshot);
+
+  return std::unexpected(Errors::error_module_not_found);
+}
+
 std::expected<std::uint32_t, Errors> Memory::FetchProcessId(std::wstring_view processName)
 {
   HANDLE snapshot{ CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0) };

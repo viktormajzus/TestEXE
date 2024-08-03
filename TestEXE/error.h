@@ -7,7 +7,8 @@ enum class Errors
   error_failed_snapshot,
   error_handle_failure,
   error_read_memory,
-  error_write_memory
+  error_write_memory,
+  error_module_not_found
 };
 
 std::string_view ErrorParser(Errors e);

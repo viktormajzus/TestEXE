@@ -10,6 +10,9 @@ private:
   HANDLE process{};
 
 public:
+  std::expected<std::uintptr_t, Errors> moduleBase{};
+
+public:
   Process(std::wstring_view processName);
   ~Process();
 
@@ -47,6 +50,8 @@ public:
 
     return *processId;
   }
+
+  std::expected<std::uintptr_t, Errors> SetModuleBase(std::wstring_view moduleBaseAddress);
 };
 
 namespace Memory

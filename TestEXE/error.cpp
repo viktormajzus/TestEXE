@@ -15,6 +15,8 @@ std::string_view ErrorParser(Errors e)
     return "ERROR: Failed to read memory!";
   case Errors::error_write_memory:
     return "ERROR: Failed to write memory!";
+  case Errors::error_module_not_found:
+    return "ERROR: Failed to find module!";
   default:
     return "ERROR: Unknown error!";
   }

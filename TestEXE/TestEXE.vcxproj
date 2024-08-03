@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="error.h" />
+    <ClInclude Include="Offsets.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Process.h" />
   </ItemGroup>
