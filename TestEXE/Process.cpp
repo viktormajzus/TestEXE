@@ -4,6 +4,7 @@
 Process::Process(std::wstring_view processName)
 {
   processId = Memory::FetchProcessId(processName);
+  // Initialize moduleBase in constructor?
   if (!processId)
   {
     std::cerr << processId.error() << "\n";
@@ -26,6 +27,7 @@ Process::~Process()
   }
 }
 
+// Call in constructor?
 std::expected<std::uintptr_t, Errors> Process::SetModuleBase(std::wstring_view moduleBase)
 {
   HANDLE snapshot{ CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, *processId) };

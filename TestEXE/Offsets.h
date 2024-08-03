@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 
+// Not used yet
 struct Vector3
 {
   float x{};
@@ -8,6 +9,7 @@ struct Vector3
   float z{};
 }vector3, Vec3, vec3;
 
+// Maybe use a struct with padding instead of individual offsets?
 namespace Offsets
 {
 inline constexpr std::uintptr_t playerBase{ 0x10f4f4 };

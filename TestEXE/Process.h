@@ -10,6 +10,8 @@ private:
   HANDLE process{};
 
 public:
+  // Perhaps add moduleBase to constructor?
+  // Add a getter function for moduleBase and make it private?
   std::expected<std::uintptr_t, Errors> moduleBase{};
 
 public:
