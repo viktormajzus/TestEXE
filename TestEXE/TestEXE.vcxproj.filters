@@ -24,7 +24,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>pch</Filter>
     </ClCompile>
-    <ClCompile Include="Proc.cpp">
+    <ClCompile Include="Process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="error.cpp">
@@ -35,7 +35,7 @@
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
     </ClInclude>
-    <ClInclude Include="Proc.h">
+    <ClInclude Include="Process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="error.h">
