@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Process.h"
 
-Process::Process(std::wstring_view processName)
+Process::Process(const TargetProcess& targetProcess)
 {
-  processId = Memory::FetchProcessId(processName);
+  processId = FetchProcessId(targetProcess.processName);
   // Initialize moduleBase in constructor?
   if (!processId)
   {
@@ -17,6 +17,13 @@ Process::Process(std::wstring_view processName)
     std::cerr << Errors::error_handle_failure << "\n";
     std::exit(EXIT_FAILURE);
   }
+
+  moduleBase = SetModuleBase(targetProcess.moduleName);
+  if (!moduleBase)
+  {
+    std::cerr << moduleBase.error() << "\n";
+    std::exit(EXIT_FAILURE);
+  }
 }
 
 Process::~Process()
@@ -25,6 +32,25 @@ Process::~Process()
   {
     CloseHandle(process);
   }
+}
+
+std::uint32_t Process::GetProcessId()
+{
+  // No point of error checking as it's done in the constructor
+  /*
+  if (!processId)
+  {
+    std::cerr << Errors::error_process_not_found << "\n";
+    return 0;
+  }
+  */
+
+  return *processId;
+}
+
+std::uintptr_t Process::GetModuleBase()
+{
+  return *moduleBase;
 }
 
 // Call in constructor?
@@ -52,7 +78,7 @@ std::expected<std::uintptr_t, Errors> Process::SetModuleBase(std::wstring_view m
   return std::unexpected(Errors::error_module_not_found);
 }
 
-std::expected<std::uint32_t, Errors> Memory::FetchProcessId(std::wstring_view processName)
+std::expected<std::uint32_t, Errors> Process::FetchProcessId(std::wstring_view processName)
 {
   HANDLE snapshot{ CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0) };
   if (snapshot == INVALID_HANDLE_VALUE)
